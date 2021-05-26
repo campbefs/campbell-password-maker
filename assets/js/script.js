@@ -4,14 +4,12 @@ const generatePassword = () => {
 
 
   let passLength = 0;
-  console.log(passLength);
   while ( passLength < 8 || passLength > 128) {
     passLength = prompt("What is the length of your password? (Please select a value between 8 and 128.)");
   }
 
   let charBool = {};
   while (!Object.keys(charBool).length) {
-    console.log('char after', charBool.length);
     charBool.lowerCase = window.confirm('Would you like to include LOWERCASE characters?');
     charBool.upperCase = confirm('Would you like to include UPPERCASE characters?');
     charBool.numeric = confirm('Would you like to include NUMERIC characters?');
@@ -21,7 +19,6 @@ const generatePassword = () => {
     if (!arrBool.filter(Boolean).length) {
       alert("You must select at least one type of character for your password!");
       charBool = {};
-      console.log('char loop again', charBool)
     }
   }
 

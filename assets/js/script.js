@@ -9,24 +9,42 @@ const generatePassword = () => {
     passLength = prompt("What is the length of your password? (Please select a value between 8 and 128.)");
   }
 
-  let characters = {};
-  while (!Object.keys(characters).length) {
-    console.log('char after', characters.length);
-    characters.lowerCase = window.confirm('Would you like to include LOWERCASE characters?');
-    characters.upperCase = confirm('Would you like to include UPPERCASE characters?');
-    characters.numeric = confirm('Would you like to include NUMBERIC characters?');
-    characters.specialChar = confirm('Would you like to include SPECIAL characters?');
+  let charBool = {};
+  while (!Object.keys(charBool).length) {
+    console.log('char after', charBool.length);
+    charBool.lowerCase = window.confirm('Would you like to include LOWERCASE characters?');
+    charBool.upperCase = confirm('Would you like to include UPPERCASE characters?');
+    charBool.numeric = confirm('Would you like to include NUMERIC characters?');
+    charBool.specialChar = confirm('Would you like to include SPECIAL characters?');
 
-    arrBool = Object.values(characters).map( x => x ? true : false);
-    console.log('arrBool', arrBool.filter(Boolean))
+    arrBool = Object.values(charBool).map( x => x ? true : false);
     if (!arrBool.filter(Boolean).length) {
       alert("You must select at least one type of character for your password!");
-      characters = {};
-      console.log('char loop again', characters)
+      charBool = {};
+      console.log('char loop again', charBool)
     }
   }
 
-  
+  let characters = [];
+  if (charBool.lowerCase) {
+    characters = characters.concat(lowerCase);
+  } 
+  if (charBool.upperCase) {
+    characters = characters.concat(upperCase);
+  }
+  if (charBool.numeric) {
+    characters = characters.concat(numeric);
+  }
+  if (charBool.specialChar) {
+    characters = characters.concat(specialChar);
+  }
+
+  let newPass = [];
+  for (let i=0; i < passLength; i++) {
+    newPass.push(characters[Math.floor(Math.random()*characters.length)]);
+  }
+
+  return newPass.join("");
 
 }
 
@@ -42,9 +60,6 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-
 const specialChar = [` `, `!`, `”`, `#`, `$`, `%`, `&`, `’`, `(`, `)`, `*`, `+`, `,`, `-`, `.`, 
 `/`, `:`, `;`, `<`, `=`, `>`, `?`, `@`, `[`, "]", "^", "_", '`', `{`, `|`, `}`, `~`];
 
@@ -55,3 +70,7 @@ const upperCase = [`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `
 `R`, `S`, `T`, `U`, `V`, `W`, `X`, `Y`, `Z`];
 
 const numeric = [`0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`];
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
+

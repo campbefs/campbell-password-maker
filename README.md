@@ -37,5 +37,8 @@
   ## License
   This application is covered under the following license: [The Do What the Fuck You Want to Public License](http://www.wtfpl.net/about/)
 
+  ## Live Application URL
+  https://campbefs.github.io/campbell-password-maker/
+
   ## Live Application Snapshot
   ![alt text](./assets/images/passwordGen.JPG 'Live Application Screenshot')
